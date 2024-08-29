@@ -9,7 +9,7 @@ max_lin = 10
 def inicializatabuleiro():
     return [[' ' for _ in range(max_col)] for _ in range(max_lin)]
 
-def imprimirBorda(ultimo, max_col):
+def imprimirBorda(ultimo):
     print('+---' * max_col + '+')
     if not ultimo:
         print('|   ' * max_col + '|')
@@ -17,11 +17,11 @@ def imprimirBorda(ultimo, max_col):
 def imprimirtabuleiro(tabuleiro):
     os.system('clear')  # Para Windows use 'cls'
     for l in range(max_lin):
-        imprimirBorda(False, max_col)
+        imprimirBorda(False)
         for c in range(max_col):
             print(f' {tabuleiro[l][c]} |', end='')
         print(f' {l + 1}')
-    imprimirBorda(True, max_col)
+    imprimirBorda(True)
 
 def validaResultado(tabuleiro, navios):
     for l in range(max_lin):
@@ -53,13 +53,11 @@ def atacar(tabuleiro, linha, coluna):
         return "Erro no ataque"
 
 def verificar_vitoria(tabuleiro, navios):
-    afundado = True
     for l in range(max_lin):
         for c in range(max_col):
             if navios[l][c] == 'N' and tabuleiro[l][c] != 'X':
-                afundado = False
-                break
-    return afundado
+                return False
+    return True
 
 def configurar_e_posicionar_navios():
     """Configura e posiciona navios na matriz."""
@@ -125,13 +123,13 @@ def capturar_entrada(jogador, coordenadas_jogadas):
         entrada = input(f"{jogador}, insira suas coordenadas de ataque (formato: linha,coluna): ")
         try:
             linha, coluna = map(int, entrada.split(','))
-            if 0 <= linha < 10 and 0 <= coluna < 10:
-                coordenada = (linha, coluna)
+            if 1 <= linha <= 10 and 1 <= coluna <= 10:
+                coordenada = (linha - 1, coluna - 1)  # Ajuste para zero-indexado
                 if coordenada in coordenadas_jogadas:
                     print("Você já jogou nessa coordenada. Tente outra.")
                 else:
                     coordenadas_jogadas.add(coordenada)
-                    return linha, coluna
+                    return coordenada
             else:
                 print("Coordenadas fora do intervalo permitido. Tente novamente.")
         except ValueError:
