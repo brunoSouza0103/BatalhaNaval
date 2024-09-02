@@ -8,14 +8,14 @@ max_lin = 10  # Número máximo de linhas no tabuleiro
 # Funções para manipular o tabuleiro
 def inicializatabuleiro():
     """
-    Inicializa um tabuleiro vazio, com todas as posições marcadas como espaço em branco.
+    Inicializa um tabuleiro vazio.
     Retorna uma matriz 10x10 de espaços em branco.
     """
     return [[" " for _ in range(max_col)] for _ in range(max_lin)]
 
 def imprimirBorda(ultimo):
     """
-    Imprime as bordas do tabuleiro. A borda final é ligeiramente diferente.
+    Imprime as bordas do tabuleiro. A borda final é diferente.
     :param ultimo: Booleano indicando se é a última borda a ser impressa.
     """
     print('+---' * max_col + '+')
@@ -38,8 +38,8 @@ def imprimirtabuleiro(tabuleiro):
 def validaResultado(tabuleiro, navios):
     """
     Verifica se o jogo terminou. Se ainda houver navios não afundados, o jogo continua.
-    :param tabuleiro: Matriz atual do tabuleiro.
-    :param navios: Matriz que contém a posição dos navios.
+    tabuleiro: Matriz atual do tabuleiro.
+    navios: Matriz que contém a posição dos navios.
     :return: String indicando o status do jogo ("Jogando" ou "Ganhou").
     """
     for l in range(max_lin):
@@ -62,11 +62,11 @@ def configurar_e_posicionar_navios():
     def pode_posicionar_navio(x, y, comprimento, horizontal):
         """
         Verifica se é possível posicionar um navio na posição especificada.
-        :param x: Linha inicial.
-        :param y: Coluna inicial.
-        :param comprimento: Comprimento do navio.
-        :param horizontal: Booleano indicando se o navio será posicionado horizontalmente.
-        :return: Booleano indicando se o posicionamento é possível.
+         x: Linha inicial.
+         y: Coluna inicial.
+         comprimento: Comprimento do navio.
+         horizontal: Booleano indicando se o navio será posicionado horizontalmente.
+        return: Booleano indicando se o posicionamento é possível.
         """
         if horizontal:
             if y + comprimento > colunas:
@@ -85,9 +85,9 @@ def configurar_e_posicionar_navios():
     def posicionar_navio(comprimento, horizontal):
         """
         Tenta posicionar um navio na matriz de forma aleatória.
-        :param comprimento: Comprimento do navio.
-        :param horizontal: Booleano indicando se o navio será posicionado horizontalmente.
-        :return: Booleano indicando se o posicionamento foi bem-sucedido.
+         comprimento: Comprimento do navio.
+         horizontal: Booleano indicando se o navio será posicionado horizontalmente.
+         return: Booleano indicando se o posicionamento foi bem-sucedido.
         """
         while True:
             if horizontal:
@@ -128,11 +128,11 @@ def configurar_e_posicionar_navios():
 def atacar(tabuleiro, navios, linha, coluna):
     """
     Realiza um ataque na coordenada especificada e atualiza o tabuleiro.
-    :param tabuleiro: Matriz atual do tabuleiro.
-    :param navios: Matriz com a posição dos navios.
-    :param linha: Linha da coordenada de ataque.
-    :param coluna: Coluna da coordenada de ataque.
-    :return: Mensagem sobre o resultado do ataque.
+     tabuleiro: Matriz atual do tabuleiro.
+     navios: Matriz com a posição dos navios.
+     linha: Linha da coordenada de ataque.
+     coluna: Coluna da coordenada de ataque.
+    return: Mensagem sobre o resultado do ataque.
     """
     if not (0 <= linha < len(tabuleiro)) or not (0 <= coluna < len(tabuleiro[0])):
         return "Posição fora dos limites do tabuleiro"
@@ -150,8 +150,8 @@ def atacar(tabuleiro, navios, linha, coluna):
 def capturar_entrada(coordenadas_jogadas):
     """
     Captura e valida a entrada do jogador para coordenadas de ataque, garantindo que não sejam repetidas.
-    :param coordenadas_jogadas: Conjunto contendo coordenadas já informadas.
-    :return: Tupla com a linha e coluna da coordenada de ataque.
+    coordenadas_jogadas: Conjunto contendo coordenadas já informadas.
+    return: Tupla(sequencia de valores) com a linha e coluna da coordenada de ataque.
     """
     while True:
         entrada = input("Insira suas coordenadas de ataque (formato: linha,coluna): ")
