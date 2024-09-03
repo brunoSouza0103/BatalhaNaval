@@ -18,9 +18,13 @@ def imprimirBorda(ultimo):
     Imprime as bordas do tabuleiro. A borda final é diferente.
     :param ultimo: Booleano indicando se é a última borda a ser impressa.
     """
-    print('+---' * max_col + '+')
+    k=1
+    print(end="+")
+    for k in range(max_col):
+        print(end="---+")
+    print('')
     if not ultimo:
-        print('|   ' * max_col + '|')
+        print(end="|")
 
 def imprimirtabuleiro(tabuleiro):
     """
